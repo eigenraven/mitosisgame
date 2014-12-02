@@ -1,0 +1,22 @@
+{
+	"name": "mitosisgame",
+	"description": "Biology group project - a game about mitosis",
+	"targetType":"executable",
+	"targetName":"mitogame",
+	"targetPath":"bin/",
+	"workingDirectory":"bin",
+	"copyright": "Copyright © 2014, pre-IB class",
+	"authors": ["Jakub Szewczyk","Maria Gajewska","Konrad Socha","Dawid Lorenz","Antoni Baum"],
+	"dependencies": {
+		"derelict-util":">=1.0.3",
+		"derelict-gl3":">=1.0.10",
+		"derelict-glfw3":">=1.0.2",
+		"gl3n":">=1.0.0",
+		"onyx-config": ">=1.1.4"
+	},
+	"versions": [
+		"Derelict3","gl3n"
+	],
+	"libs-posix":["dl","GL"],
+	"libs-windows":["opengl32","user32","kernel32"]
+}

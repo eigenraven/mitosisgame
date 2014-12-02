@@ -1,28 +1,27 @@
-# Compiled Object files
-*.slo
-*.lo
+.dub
+docs.json
+__dummy.html
 *.o
 *.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-
-# Compiled Static libraries
+*~
+*.bkp
+*.slo
+*.lo
 *.lai
 *.la
 *.a
 *.lib
-
-# Executables
+*.backup
+.lock*
+*.userprefs
+bin/mitogame
 *.exe
-*.out
-*.app
+*.ilk
+*.pdb
+*.dll
+Thumbs.db
+*.log
+*.cache
+*.suo
+*.exp
+*.swp
