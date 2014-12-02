@@ -10,13 +10,9 @@
 	"dependencies": {
 		"derelict-util":">=1.0.3",
 		"derelict-gl3":">=1.0.10",
-		"derelict-glfw3":">=1.0.2",
-		"gl3n":">=1.0.0",
+		"derelict-sfml2":">=1.1.0",
 		"onyx-config": ">=1.1.4"
 	},
-	"versions": [
-		"Derelict3","gl3n"
-	],
 	"libs-posix":["dl","GL"],
 	"libs-windows":["opengl32","user32","kernel32"]
 }
