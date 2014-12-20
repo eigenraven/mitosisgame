@@ -3,7 +3,7 @@ import imps;
 
 public enum WindowWidth = 800;
 public enum WindowHeight = 600;
-public enum WindowTitle = "Mitosis - Cellionaires";
+public enum WindowTitle = "Mitosis - Cellionaires ; FPS = %5.2f";
 public sfRenderWindow* rwin;
 public StanGry gstate,nstate;
 
@@ -28,20 +28,29 @@ void main()
 	cs.minorVersion=2;
 	rendMode = new sfRenderStates();
 	rendMode.blendMode = sfBlendAlpha;
-	rwin = sfRenderWindow_create(vm,toStringz(WindowTitle),sfTitlebar|sfClose,cs);
+	rwin = sfRenderWindow_create(vm,toStringz(format(WindowTitle,120.0f)),sfTitlebar|sfClose,cs);
 	sfRenderWindow_setFramerateLimit(rwin,120);
 	sfRenderWindow_setVerticalSyncEnabled(rwin,sfTrue);
 	gstate = new StanMenu();
-	sfClock *fclock;
+	sfClock* fclock,tclock;
 	fclock = sfClock_create();
-	double dt;
+	tclock = sfClock_create();
+	double dt,fps,afps=0;
 	nstate = gstate;
 	while((gstate !is null) && (sfRenderWindow_isOpen(rwin)))
 	{
 		dt = sfTime_asSeconds(sfClock_restart(fclock));
-		gstate.update(dt,rwin);
+		fps = 1/dt;
+		afps = (fps*5+afps)/6.0;
+		if(sfTime_asSeconds(sfClock_getElapsedTime(tclock))>=1.0)
+		{
+			sfRenderWindow_setTitle(rwin,toStringz(format(WindowTitle,afps)));
+			sfClock_restart(tclock);
+		}
+		nstate = gstate.update(dt,rwin);
 		if(nstate != gstate)
 		{
+			gstate.free();
 			gstate = nstate;
 			GC.collect();
 			continue;

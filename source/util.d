@@ -75,5 +75,15 @@ interface StanGry
 {
 	StanGry update(double dt, sfRenderWindow* rwin);
 	void render(sfRenderWindow* rwin);
+	void free();
 	void onevent(sfRenderWindow* rwin, sfEvent* ev);
+}
+
+class FreeObj(T,alias freefun)
+{
+	public T o;
+	~this()
+	{
+		freefun(o);
+	}
 }

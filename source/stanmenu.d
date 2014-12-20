@@ -2,6 +2,8 @@
 
 import imps;
 
+private shared bool didPlay = false;
+
 class StanMenu : StanGry
 {
 	sfTexture* texBg;
@@ -12,8 +14,6 @@ class StanMenu : StanGry
 	sfSprite* background;
 	Button[string] btns;
 	HSTREAM music;
-
-	bool didQuit=false;
 
 	public this()
 	{
@@ -27,18 +27,18 @@ class StanMenu : StanGry
 		BASS_ChannelSetAttribute(music,BASS_ATTRIB_VOL,0.3f);
 
 		// GUI
-		btns["play"] = new Button("Play",250,250,300,64,texPlay,null);
+		btns["play"] = new Button("Play",250,250,300,64,texPlay,&this.SwitchPlay);
 		btns["quit"] = new Button("Quit",250,350,300,64,texQuit,&this.Quit);
 	}
 
-	~this()
+	public void free()
 	{
 		sfSprite_destroy(background);
 		sfTexture_destroy(texBg);
 		sfTexture_destroy(texQuit);
 		sfTexture_destroy(texPlay);
-		BASS_ChannelStop(music);
 		BASS_StreamFree(music);
+		BASS_Pause();
 	}
 
 	void Quit(float x, float y)
@@ -46,9 +46,18 @@ class StanMenu : StanGry
 		sfRenderWindow_close(rwin);
 	}
 
+	void SwitchPlay(float x, float y)
+	{
+		BASS_ChannelStop(music);
+		didPlay = true;
+	}
+
 	public StanGry update(double dt, sfRenderWindow* rwin)
 	{
-		if(didQuit)return null;
+		if(didPlay)
+		{
+			return new StanGrajacy();
+		}
 		return this;
 	}
 
