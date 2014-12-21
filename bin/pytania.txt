@@ -1,0 +1,25 @@
+﻿% Answer A.
+= A
+- B
+- C
+- D
+% Answer B.
+- A
+= B
+- C
+- D
+% Answer C.
+- A
+- B
+= C
+- D
+% Answer D.
+- A
+- B
+- C
+= D
+% How many and what cells are the result of mitosis?
+- 4 x n
+- 4 x 2n
+= 2 x 2n
+- 2 x n

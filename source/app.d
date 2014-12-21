@@ -1,11 +1,34 @@
 module app;
 import imps;
 
-public enum WindowWidth = 800;
-public enum WindowHeight = 600;
-public enum WindowTitle = "Mitosis - Cellionaires ; FPS = %5.2f";
+public int WindowWidth = 800;
+public int WindowHeight = 600;
+public int WinFlags = sfTitlebar|sfClose;
+public string WindowTitle = "Mitosis - Cellionaires ; FPS = %5.2f";
 public sfRenderWindow* rwin;
 public StanGry gstate,nstate;
+public immutable(ConfBundle) cfg;
+
+static this()
+{
+	cfg = immutable ConfBundle("config.cfg");
+}
+
+private void PrintDevs()
+{
+	int a, count=0;
+	BASS_DEVICEINFO info;
+	writeln("--- Urzadzenia audio {");
+	for(a=0;BASS_GetDeviceInfo(a,&info);a++)
+	{
+		if(info.flags & BASS_DEVICE_ENABLED)
+		{
+			writefln("Device %d: %s",a,info.name[0..strlen(info.name)]);
+			count++;
+		}
+	}
+	writeln("--- }");
+}
 
 void main()
 {
@@ -14,7 +37,13 @@ void main()
 	DerelictSFML2Window.load();
 	DerelictSFML2Graphics.load();
 	DerelictBASS.load();
-	if(!BASS_Init(-1,48000,0,null,null))throw new Error(text(BASS_ErrorGetCode()));
+	PrintDevs();
+
+	WindowWidth = cfg.intValue("video","WinWidth");
+	WindowHeight = cfg.intValue("video","WinHeight");
+	if(cfg.intValue("video","WinResize")>0)WinFlags |= sfResize;
+
+	if(!BASS_Init(cfg.intValue("audio","Device"),48000,0,null,null))throw new Error(text(BASS_ErrorGetCode()));
 	scope(exit)BASS_Free();
 	BASS_SetVolume(1.0f);
 	BASS_Start();
@@ -28,7 +57,7 @@ void main()
 	cs.minorVersion=2;
 	rendMode = new sfRenderStates();
 	rendMode.blendMode = sfBlendAlpha;
-	rwin = sfRenderWindow_create(vm,toStringz(format(WindowTitle,120.0f)),sfTitlebar|sfClose,cs);
+	rwin = sfRenderWindow_create(vm,toStringz(format(WindowTitle,120.0f)),WinFlags,cs);
 	sfRenderWindow_setFramerateLimit(rwin,120);
 	sfRenderWindow_setVerticalSyncEnabled(rwin,sfTrue);
 	gstate = new StanMenu();
