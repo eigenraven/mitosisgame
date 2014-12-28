@@ -56,7 +56,7 @@ void main()
 	cs.majorVersion=1;
 	cs.minorVersion=2;
 	rendMode = new sfRenderStates();
-	rendMode.blendMode = sfBlendAlpha;
+	rendMode.blendMode = sfBlendAdd;
 	rwin = sfRenderWindow_create(vm,toStringz(format(WindowTitle,120.0f)),WinFlags,cs);
 	sfRenderWindow_setFramerateLimit(rwin,120);
 	sfRenderWindow_setVerticalSyncEnabled(rwin,sfTrue);

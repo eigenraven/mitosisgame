@@ -1,8 +1,8 @@
 ﻿/// Importy i wspolne zmienne.
 module imps;
 
-public import std.stdio, std.string, std.string, std.conv, std.array, std.algorithm;
-public import std.random, core.memory, std.format, std.c.string, std.datetime;
+public import std.stdio, std.string, std.string, std.conv, std.array, std.algorithm, std.math;
+public import std.random, core.memory, std.format, std.c.string, std.datetime, std.exception;
 public import std.functional, onyx.config.bundle;
 public import derelict.sfml2.system;
 public import derelict.sfml2.window;

@@ -2,6 +2,12 @@
 
 class Pytanie
 {
+	public this(string Q, string[4] A, int ok)
+	{
+		pytanie = Q;
+		odp = A.dup;
+		dobra = ok;
+	}
 	string pytanie;
 	string[4] odp;
 	int dobra;
@@ -19,6 +25,7 @@ class ParametryGry
 		// Pytania
 		Pytanie[] remQuests;
 		Pytanie[] origQuests;
+		Pytanie curQuest;
 		// Upgradey
 		long lvlDivSpeed = 1;
 		long lvlAtpPerAns = 1;

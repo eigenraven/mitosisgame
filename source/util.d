@@ -46,15 +46,15 @@ class Button
 		{
 			//this.shape.sfRectangleShape_setTexture(null,false);
 			this.shape.sfRectangleShape_setFillColor(sfWhite);
-			this.shape.sfRectangleShape_setOutlineColor(sfBlack);
-			this.shape.sfRectangleShape_setOutlineThickness(2f);
+			this.shape.sfRectangleShape_setOutlineColor(sfTransparent);
+			this.shape.sfRectangleShape_setOutlineThickness(1f);
 		}
 		else
 		{
 			this.shape.sfRectangleShape_setTexture(texture,true);
 			this.shape.sfRectangleShape_setFillColor(sfWhite);
-			this.shape.sfRectangleShape_setOutlineColor(sfBlack);
-			this.shape.sfRectangleShape_setOutlineThickness(2f);
+			this.shape.sfRectangleShape_setOutlineColor(sfTransparent);
+			this.shape.sfRectangleShape_setOutlineThickness(1f);
 		}
 	}
 
@@ -62,7 +62,7 @@ class Button
 	{
 		if(Clicked(mouseCoord.x,mouseCoord.y))this.shape.sfRectangleShape_setOutlineColor(sfRed);
 		else this.shape.sfRectangleShape_setOutlineColor(sfBlack);
-		sfRenderWindow_drawRectangleShape(win,shape,null);
+		sfRenderWindow_drawRectangleShape(win,shape,rendMode);
 	}
 
 	public void RunCallback()
