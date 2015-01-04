@@ -48,6 +48,7 @@ void main()
 	sfClock* fclock,tclock;
 	fclock = sfClock_create();
 	tclock = sfClock_create();
+	sfClock_restart(tclock);
 	double dt,fps,afps=0;
 	nstate = gstate;
 	while((gstate !is null) && (sfRenderWindow_isOpen(rwin)))

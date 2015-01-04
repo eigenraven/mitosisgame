@@ -17,9 +17,9 @@ class StanMenu : StanGry
 
 	public this()
 	{
-		texBg = sfTexture_createFromFile("res/bgimg.png",null);
-		texPlay = sfTexture_createFromFile("res/play.png",null);
-		texQuit = sfTexture_createFromFile("res/quit.png",null);
+		texBg = sfTexture_createFromFile("res/bgimg.png".toStringz(),null);
+		texPlay = sfTexture_createFromFile("res/play.png".toStringz(),null);
+		texQuit = sfTexture_createFromFile("res/quit.png".toStringz(),null);
 		background = sfSprite_create();
 		sfSprite_setTexture(background, texBg, sfFalse);
 

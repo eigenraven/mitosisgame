@@ -2,6 +2,7 @@
 import imps;
 
 alias void delegate(float,float) BtnCallback;
+alias void delegate() TmrCallback;
 
 public sfRenderStates *rendMode;
 public sfVector2f mouseCoord;
@@ -12,6 +13,7 @@ class Button
 	public sfFloatRect* location;
 	public sfRectangleShape* shape;
 	public sfTexture* texture;
+	public sfText* text;
 	public BtnCallback onClick;
 
 	public this(string name="przycisk", float x=0, float y=0, float w=32, float h=32, sfTexture* tex=null, BtnCallback click=null)
@@ -63,11 +65,45 @@ class Button
 		if(Clicked(mouseCoord.x,mouseCoord.y))this.shape.sfRectangleShape_setOutlineColor(sfRed);
 		else this.shape.sfRectangleShape_setOutlineColor(sfTransparent);
 		sfRenderWindow_drawRectangleShape(win,shape,null);
+		if(this.text)sfRenderWindow_drawText(win,this.text,null);
 	}
 
 	public void RunCallback()
 	{
 		if(onClick != null)onClick(mouseCoord.x,mouseCoord.y);
+	}
+}
+
+class Timer
+{
+	double mt;
+	StopWatch sw;
+	TmrCallback CB;
+	bool Active=true;
+	public this(double time, TmrCallback cb)
+	{
+		sw.start();
+		Reset(time,cb);
+	}
+	public void Reset(double time, TmrCallback cb=CB)
+	{
+		mt = time;
+		CB = cb;
+		Active=true;
+		if(sw.running())sw.stop();
+		sw.reset();
+		sw.start();
+	}
+	public void Update(double dt)
+	{
+		if(Active)
+		{
+			if(sw.peek.msecs>=mt*1000)
+			{
+				CB();
+				if(!Active)sw.stop();
+			}
+		}
 	}
 }
 

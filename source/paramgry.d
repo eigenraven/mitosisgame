@@ -1,5 +1,7 @@
 ﻿module paramgry;
 
+import std.math;
+
 class Pytanie
 {
 	public this(string Q, string[4] A, int ok)
@@ -28,7 +30,9 @@ class ParametryGry
 		Pytanie curQuest;
 		// Upgradey
 		long lvlDivSpeed = 1;
+		long lvlDivSpeedPlus = 1;
 		long lvlAtpPerAns = 1;
+		long lvlAtpPerDiv = 1;
 	}
 
 	this()
@@ -37,6 +41,11 @@ class ParametryGry
 
 	~this()
 	{
+	}
+
+	public void AddQuestionATP()
+	{
+		ATP += cast(long)(pow(lvlAtpPerAns,0.7)+0.6);
 	}
 
 }
