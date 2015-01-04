@@ -24,7 +24,7 @@ class StanMenu : StanGry
 		sfSprite_setTexture(background, texBg, sfFalse);
 		music = BASS_StreamCreateFile(0,cast(void*)("res/menumusic.ogg\0".dup),0,0,BASS_SAMPLE_LOOP);
 		BASS_ChannelPlay(music,1);
-		BASS_ChannelSetAttribute(music,BASS_ATTRIB_VOL,0.3f);
+		BASS_ChannelSetAttribute(music,BASS_ATTRIB_VOL,0.7f);
 
 		// GUI
 		btns["play"] = new Button("Play",250,250,300,64,texPlay,&this.SwitchPlay);
@@ -38,7 +38,6 @@ class StanMenu : StanGry
 		sfTexture_destroy(texQuit);
 		sfTexture_destroy(texPlay);
 		BASS_StreamFree(music);
-		BASS_Pause();
 	}
 
 	void Quit(float x, float y)
@@ -63,7 +62,7 @@ class StanMenu : StanGry
 
 	public void render(sfRenderWindow* rwin)
 	{
-		sfRenderWindow_drawSprite(rwin,background,null);
+		sfRenderWindow_drawSprite(rwin,background,rendMode);
 		foreach(Button B; btns)
 		{
 			B.Draw(rwin);

@@ -9,7 +9,7 @@
 	"authors": ["Jakub Szewczyk","Maria Gajewska","Konrad Socha","Dawid Lorenz","Antoni Baum"],
 	"dependencies": {
 		"derelict-util":">=1.0.3",
-		"derelict-gl3":">=1.0.10",
+		"derelict-gl3":">=1.0.11",
 		"derelict-sfml2":">=1.1.0",
 		"derelict_extras-bass":">=1.0.0",
 		"onyx-config": ">=1.1.4"

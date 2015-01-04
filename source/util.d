@@ -61,8 +61,8 @@ class Button
 	public void Draw(sfRenderWindow* win)
 	{
 		if(Clicked(mouseCoord.x,mouseCoord.y))this.shape.sfRectangleShape_setOutlineColor(sfRed);
-		else this.shape.sfRectangleShape_setOutlineColor(sfBlack);
-		sfRenderWindow_drawRectangleShape(win,shape,rendMode);
+		else this.shape.sfRectangleShape_setOutlineColor(sfTransparent);
+		sfRenderWindow_drawRectangleShape(win,shape,null);
 	}
 
 	public void RunCallback()

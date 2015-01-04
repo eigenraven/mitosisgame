@@ -9,6 +9,7 @@ class StanGrajacy : StanGry
 	Random rand;
 	sfSprite* BG;
 	sfTexture* BG_tex, AnsTex;
+	HSTREAM music;
 
 	/// Random [a..b]
 	public double RD(double a, double b)
@@ -51,6 +52,10 @@ class StanGrajacy : StanGry
 		BG = sfSprite_create();
 		sfSprite_setTexture(BG,BG_tex,sfTrue);
 
+		music = BASS_StreamCreateFile(0,cast(void*)("res/gamemusic.ogg\0".dup),0,0,BASS_SAMPLE_LOOP);
+		BASS_ChannelPlay(music,1);
+		BASS_ChannelSetAttribute(music,BASS_ATTRIB_VOL,0.7f);
+
 		btns["ans1"] = new Button("Ans1",8,500,380,36,AnsTex,&OnClickAns!(0));
 		sfRectangleShape_setTextureRect(btns["ans1"].shape,sfIntRect(0,0,380,36));
 		btns["ans2"] = new Button("Ans1",400,500,380,36,AnsTex,&OnClickAns!(1));
@@ -63,6 +68,8 @@ class StanGrajacy : StanGry
 	
 	public void free()
 	{
+		BASS_StreamFree(music);
+		BASS_Pause();
 	}
 	
 	public StanGry update(double dt, sfRenderWindow* rwin)
