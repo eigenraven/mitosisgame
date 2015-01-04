@@ -13,7 +13,7 @@ class StanMenu : StanGry
 
 	sfSprite* background;
 	Button[string] btns;
-	HSTREAM music;
+	Audio music;
 
 	public this()
 	{
@@ -22,9 +22,10 @@ class StanMenu : StanGry
 		texQuit = sfTexture_createFromFile("res/quit.png",null);
 		background = sfSprite_create();
 		sfSprite_setTexture(background, texBg, sfFalse);
-		music = BASS_StreamCreateFile(0,cast(void*)("res/menumusic.ogg\0".dup),0,0,BASS_SAMPLE_LOOP);
-		BASS_ChannelPlay(music,1);
-		BASS_ChannelSetAttribute(music,BASS_ATTRIB_VOL,0.7f);
+
+		music = new Audio("res/menumusic.ogg");
+		music.Loop = true;
+		music.Play();
 
 		// GUI
 		btns["play"] = new Button("Play",250,250,300,64,texPlay,&this.SwitchPlay);
@@ -37,7 +38,7 @@ class StanMenu : StanGry
 		sfTexture_destroy(texBg);
 		sfTexture_destroy(texQuit);
 		sfTexture_destroy(texPlay);
-		BASS_StreamFree(music);
+		music.Stop();
 	}
 
 	void Quit(float x, float y)
@@ -47,7 +48,6 @@ class StanMenu : StanGry
 
 	void SwitchPlay(float x, float y)
 	{
-		BASS_ChannelStop(music);
 		didPlay = true;
 	}
 

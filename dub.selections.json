@@ -3,10 +3,13 @@
 	"versions": {
 		"gl3n": "1.0.0",
 		"derelict_extras-bass": "1.0.0",
-		"derelict-util": "1.0.3",
+		"derelict-ogg": "1.0.1",
+		"derelict-util": "1.9.0",
 		"onyx-config": "1.1.4",
 		"derelict-sfml2": "1.1.0",
 		"derelict-glfw3": "1.0.2",
-		"derelict-gl3": "1.0.10"
+		"derelict-al": "1.0.0",
+		"derelict-vorbis": "1.0.1",
+		"derelict-gl3": "1.0.11"
 	}
 }
