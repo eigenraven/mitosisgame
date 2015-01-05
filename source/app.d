@@ -45,21 +45,20 @@ void main()
 	sfRenderWindow_setFramerateLimit(rwin,120);
 	sfRenderWindow_setVerticalSyncEnabled(rwin,sfTrue);
 	gstate = new StanMenu();
-	sfClock* fclock,tclock;
-	fclock = sfClock_create();
-	tclock = sfClock_create();
-	sfClock_restart(tclock);
-	double dt,fps,afps=0;
+	StopWatch fclock,tclock;
+	fclock.start();
+	tclock.start();
+	double dt,fps;
 	nstate = gstate;
 	while((gstate !is null) && (sfRenderWindow_isOpen(rwin)))
 	{
-		dt = sfTime_asSeconds(sfClock_restart(fclock));
+		dt = fclock.peek.usecs/1000000.0;
+		fclock.reset();
 		fps = 1/dt;
-		afps = (fps*5+afps)/6.0;
-		if(sfTime_asSeconds(sfClock_getElapsedTime(tclock))>=1.0)
+		if(tclock.peek.msecs>=1000)
 		{
-			sfRenderWindow_setTitle(rwin,toStringz(format(WindowTitle,afps)));
-			sfClock_restart(tclock);
+			sfRenderWindow_setTitle(rwin,toStringz(format(WindowTitle,fps)));
+			tclock.reset();
 		}
 		nstate = gstate.update(dt,rwin);
 		if(nstate != gstate)
