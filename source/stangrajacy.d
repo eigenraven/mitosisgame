@@ -158,9 +158,10 @@ class StanGrajacy : StanGry
 			if(stan.ATP>=stan.FrameCost)
 			{
 				stan.NextFrame();
+				auto R = sfIntRect(cast(int)((stan.CellFrame/8)*128),cast(int)((stan.CellFrame%8)*128),128,128);
 				for(int i=0;i<8;i++)
 				{
-					sfSprite_setTextureRect(Cells[i],sfIntRect(0,cast(int)stan.CellFrame*128,128,128));
+					sfSprite_setTextureRect(Cells[i],R);
 				}
 			}
 			Cwatch.reset();
