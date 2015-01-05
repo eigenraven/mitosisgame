@@ -13,7 +13,6 @@ private ALCcontext* ctx;
 
 public void InitAudio()
 {
-	DerelictOgg.load();
 	DerelictVorbis.load();
 	DerelictVorbisFile.load();
 	DerelictAL.load();

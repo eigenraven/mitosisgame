@@ -7,7 +7,6 @@ public import std.functional, onyx.config.bundle, std.system;
 public import derelict.sfml2.system;
 public import derelict.sfml2.window;
 public import derelict.sfml2.graphics;
-public import derelict.ogg.ogg;
 public import derelict.vorbis.vorbis;
 public import derelict.vorbis.file;
 public import derelict.openal.al;
