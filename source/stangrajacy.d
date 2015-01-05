@@ -2,7 +2,12 @@
 
 import imps;
 
-enum int FONT_SIZE = 18;
+enum int FONT_SIZE = 20;
+enum int FONTB_SIZE = 24;
+enum int FONTU_SIZE = 16;
+
+sfColor darkGreen = sfColor(0,90,0,255);
+sfColor darkRed = sfColor(90,0,0,255);
 
 class StanGrajacy : StanGry
 {
@@ -12,8 +17,8 @@ class StanGrajacy : StanGry
 	Random rand;
 	sfSprite* BG;
 	sfTexture* BG_tex, AnsTex;
-	sfFont* Fnt;
-	sfText* Qtext;
+	sfFont* Fnt,FntB;
+	sfText* Qtext, CellNtext, ATPtext;
 	Audio music;
 	bool LockQ=false;
 
@@ -21,6 +26,17 @@ class StanGrajacy : StanGry
 	public double RD(double a, double b)
 	{
 		return uniform(a,b,rand);
+	}
+
+	public sfText* mkText(sfFont* font, sfColor color, string str, int charSize, sfVector2f pos)
+	{
+		sfText* tmp = sfText_create();
+		sfText_setFont(tmp,font);
+		sfText_setColor(tmp,color);
+		sfText_setString(tmp,str.toStringz);
+		sfText_setCharacterSize(tmp,charSize);
+		sfText_setPosition(tmp,pos);
+		return tmp;
 	}
 
 	public this()
@@ -32,46 +48,38 @@ class StanGrajacy : StanGry
 		BG = sfSprite_create();
 		sfSprite_setTexture(BG,BG_tex,sfTrue);
 		Fnt = sfFont_createFromFile("res/font.ttf".toStringz());
+		FntB = sfFont_createFromFile("res/bigfont.ttf".toStringz());
 		
 		music = new Audio("res/gamemusic.ogg");
 		music.Loop = true;
 		music.Play();
 		
 		btns["ans1"] = new Button("Ans1",8,500,380,36,AnsTex,&OnClickAns!(0));
-		btns["ans1"].text = sfText_create();
-		btns["ans1"].text.sfText_setFont(Fnt);
-		btns["ans1"].text.sfText_setColor(sfWhite);
-		btns["ans1"].text.sfText_setString(toStringz("???"));
-		btns["ans1"].text.sfText_setCharacterSize(FONT_SIZE);
-		btns["ans1"].text.sfText_setPosition(sfVector2f(16,502));
+		btns["ans1"].text = mkText(Fnt,sfWhite,"???",FONT_SIZE,sfVector2f(16,502));
 		btns["ans2"] = new Button("Ans1",400,500,380,36,AnsTex,&OnClickAns!(1));
-		btns["ans2"].text = sfText_create();
-		btns["ans2"].text.sfText_setFont(Fnt);
-		btns["ans2"].text.sfText_setColor(sfWhite);
-		btns["ans2"].text.sfText_setString(toStringz("???"));
-		btns["ans2"].text.sfText_setCharacterSize(FONT_SIZE);
-		btns["ans2"].text.sfText_setPosition(sfVector2f(408,502));
+		btns["ans2"].text = mkText(Fnt,sfWhite,"???",FONT_SIZE,sfVector2f(408,502));
 		btns["ans3"] = new Button("Ans1",8,540,380,36,AnsTex,&OnClickAns!(2));
-		btns["ans3"].text = sfText_create();
-		btns["ans3"].text.sfText_setFont(Fnt);
-		btns["ans3"].text.sfText_setColor(sfWhite);
-		btns["ans3"].text.sfText_setString(toStringz("???"));
-		btns["ans3"].text.sfText_setCharacterSize(FONT_SIZE);
-		btns["ans3"].text.sfText_setPosition(sfVector2f(16,542));
+		btns["ans3"].text = mkText(Fnt,sfWhite,"???",FONT_SIZE,sfVector2f(16,542));
 		btns["ans4"] = new Button("Ans1",400,540,380,36,AnsTex,&OnClickAns!(3));
-		btns["ans4"].text = sfText_create();
-		btns["ans4"].text.sfText_setFont(Fnt);
-		btns["ans4"].text.sfText_setColor(sfWhite);
-		btns["ans4"].text.sfText_setString(toStringz("???"));
-		btns["ans4"].text.sfText_setCharacterSize(FONT_SIZE);
-		btns["ans4"].text.sfText_setPosition(sfVector2f(408,542));
-		Qtext = sfText_create();
-		Qtext.sfText_setFont(Fnt);
-		Qtext.sfText_setColor(sfWhite);
-		Qtext.sfText_setString(toStringz("QQQ???QQQ"));
-		Qtext.sfText_setCharacterSize(FONT_SIZE);
-		Qtext.sfText_setPosition(sfVector2f(16,470));
-		
+		btns["ans4"].text = mkText(Fnt,sfWhite,"???",FONT_SIZE,sfVector2f(408,542));
+		Qtext = mkText(Fnt,sfWhite,"QQQ???QQQ",FONT_SIZE,sfVector2f(16,465));
+
+		btns["upg1"] = new Button("ATPmag",535,15,240,103,null,&stan.ATPmagnet);
+		btns["upg1"].text = mkText(FntB,sfWhite,"Lv99",FONTU_SIZE,sfVector2f(715,18));
+		btns["upg1"].text2= mkText(FntB,sfWhite,"123 ATP",FONTU_SIZE,sfVector2f(554,18));
+		btns["upg2"] = new Button("ATPboost",535,126,240,103,null,&stan.ATPboost);
+		btns["upg2"].text = mkText(FntB,sfWhite,"Lv99",FONTU_SIZE,sfVector2f(715,127));
+		btns["upg2"].text2= mkText(FntB,sfWhite,"123 ATP",FONTU_SIZE,sfVector2f(552,127));
+		btns["upg3"] = new Button("Mitochondria",535,237,240,103,null,&stan.Mitochondria);
+		btns["upg3"].text = mkText(FntB,sfWhite,"Lv99",FONTU_SIZE,sfVector2f(715,238));
+		btns["upg3"].text2= mkText(FntB,sfWhite,"123 ATP",FONTU_SIZE,sfVector2f(582,238));
+		btns["upg4"] = new Button("MitoPlus",535,348,240,103,null,&stan.MitochondriaPlus);
+		btns["upg4"].text = mkText(FntB,sfWhite,"Lv99",FONTU_SIZE,sfVector2f(715,348));
+		btns["upg4"].text2= mkText(FntB,sfWhite,"123 ATP",FONTU_SIZE,sfVector2f(582,348));
+
+		CellNtext = mkText(FntB,sfWhite,"? CELLS",FONTB_SIZE,sfVector2f(210,410));
+		ATPtext = mkText(FntB,sfWhite,"? ATP",FONTB_SIZE,sfVector2f(32,400));
+
 		qTimer = new Timer(3,null);
 		qTimer.Active=false;
 
@@ -99,7 +107,7 @@ class StanGrajacy : StanGry
 			}
 			enforce( (numm==3)&&(numc==1) ,"Zly zestaw odpowiedzi do pytania w linii %d".format(i+1));
 			stan.origQuests.length++;
-			stan.origQuests[$-1] = new Pytanie(Q,As,CA);
+			stan.origQuests[$-1] = new Pytanie(Q[2..$],As,CA);
 		}
 		stan.remQuests = stan.origQuests.dup;
 	}
@@ -112,6 +120,16 @@ class StanGrajacy : StanGry
 	public StanGry update(double dt, sfRenderWindow* rwin)
 	{
 		qTimer.Update(dt);
+		sfText_setString(CellNtext, "%d CELLS".format(stan.Ecells).toStringz());
+		sfText_setString(ATPtext, "%3d ATP".format(stan.ATP).toStringz());
+		sfText_setString(btns["upg1"].text, "Lv%2d".format(stan.lvlAtpPerDiv).toStringz());
+		sfText_setString(btns["upg2"].text, "Lv%2d".format(stan.lvlAtpPerAns).toStringz());
+		sfText_setString(btns["upg3"].text, "Lv%2d".format(stan.lvlDivSpeed).toStringz());
+		sfText_setString(btns["upg4"].text, "Lv%2d".format(stan.lvlDivSpeedPlus).toStringz());
+		sfText_setString(btns["upg1"].text2,"%3d ATP".format(stan.costATPmagnet).toStringz());
+		sfText_setString(btns["upg2"].text2,"%3d ATP".format(stan.costATPboost).toStringz());
+		sfText_setString(btns["upg3"].text2,"%3d ATP".format(stan.costMito).toStringz());
+		sfText_setString(btns["upg4"].text2,"%3d ATP".format(stan.costMitoPlus).toStringz());
 		return this;
 	}
 
@@ -128,7 +146,7 @@ class StanGrajacy : StanGry
 			sfRectangleShape_setTextureRect(btns["ans2"].shape,sfIntRect(0,(i==1)?(36):(72),380,36));
 			sfRectangleShape_setTextureRect(btns["ans3"].shape,sfIntRect(0,(i==2)?(36):(72),380,36));
 			sfRectangleShape_setTextureRect(btns["ans4"].shape,sfIntRect(0,(i==3)?(36):(72),380,36));
-			btns["ans"~text(i+1)].text.sfText_setColor(sfCyan);
+			btns["ans"~text(i+1)].text.sfText_setColor(darkGreen);
 			stan.IleDobrzePyt++;
 			stan.AddQuestionATP();
 		}
@@ -139,9 +157,9 @@ class StanGrajacy : StanGry
 			sfRectangleShape_setTextureRect(btns["ans2"].shape,sfIntRect(0,(D==1)?(36):(72),380,36));
 			sfRectangleShape_setTextureRect(btns["ans3"].shape,sfIntRect(0,(D==2)?(36):(72),380,36));
 			sfRectangleShape_setTextureRect(btns["ans4"].shape,sfIntRect(0,(D==3)?(36):(72),380,36));
-			btns["ans"~text(i+1)].text.sfText_setColor(sfMagenta);
+			btns["ans"~text(i+1)].text.sfText_setColor(darkRed);
 		}
-		qTimer.Reset(3.0,&this.NextQuestion);
+		qTimer.Reset(2.3,&this.NextQuestion);
 	}
 
 	public void NextQuestion()
@@ -187,6 +205,8 @@ class StanGrajacy : StanGry
 	{
 		sfRenderWindow_drawSprite(rwin,BG,null);
 		sfRenderWindow_drawText(rwin,Qtext,null);
+		sfRenderWindow_drawText(rwin,ATPtext,null);
+		sfRenderWindow_drawText(rwin,CellNtext,null);
 		foreach(Button B; btns)
 		{
 			B.Draw(rwin);

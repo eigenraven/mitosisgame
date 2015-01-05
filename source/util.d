@@ -13,7 +13,7 @@ class Button
 	public sfFloatRect* location;
 	public sfRectangleShape* shape;
 	public sfTexture* texture;
-	public sfText* text;
+	public sfText* text, text2;
 	public BtnCallback onClick;
 
 	public this(string name="przycisk", float x=0, float y=0, float w=32, float h=32, sfTexture* tex=null, BtnCallback click=null)
@@ -47,7 +47,7 @@ class Button
 		if(texture is null)
 		{
 			//this.shape.sfRectangleShape_setTexture(null,false);
-			this.shape.sfRectangleShape_setFillColor(sfWhite);
+			this.shape.sfRectangleShape_setFillColor(sfTransparent);
 			this.shape.sfRectangleShape_setOutlineColor(sfTransparent);
 			this.shape.sfRectangleShape_setOutlineThickness(1f);
 		}
@@ -62,10 +62,11 @@ class Button
 
 	public void Draw(sfRenderWindow* win)
 	{
-		if(Clicked(mouseCoord.x,mouseCoord.y))this.shape.sfRectangleShape_setOutlineColor(sfRed);
+		if(Clicked(mouseCoord.x,mouseCoord.y))this.shape.sfRectangleShape_setOutlineColor(sfColor(170,64,64,150));
 		else this.shape.sfRectangleShape_setOutlineColor(sfTransparent);
 		sfRenderWindow_drawRectangleShape(win,shape,null);
 		if(this.text)sfRenderWindow_drawText(win,this.text,null);
+		if(this.text2)sfRenderWindow_drawText(win,this.text2,null);
 	}
 
 	public void RunCallback()
