@@ -16,10 +16,12 @@ class StanGrajacy : StanGry
 	ParametryGry stan;
 	Random rand;
 	sfSprite* BG;
-	sfTexture* BG_tex, AnsTex;
+	sfSprite*[8] Cells;
+	sfTexture* BG_tex, AnsTex, CellTex;
 	sfFont* Fnt,FntB;
 	sfText* Qtext, CellNtext, ATPtext;
 	Audio music;
+	StopWatch Cwatch;
 	bool LockQ=false;
 
 	/// Random [a..b]
@@ -45,10 +47,21 @@ class StanGrajacy : StanGry
 		ParseQs();
 		BG_tex = sfTexture_createFromFile("res/gamebg.png".toStringz(),null);
 		AnsTex = sfTexture_createFromFile("res/answerbtn.png".toStringz(),null);
+		CellTex= sfTexture_createFromFile("res/cell.png".toStringz(),null);
 		BG = sfSprite_create();
 		sfSprite_setTexture(BG,BG_tex,sfTrue);
 		Fnt = sfFont_createFromFile("res/font.ttf".toStringz());
 		FntB = sfFont_createFromFile("res/bigfont.ttf".toStringz());
+		
+		for(int i=0;i<8;i++)
+		{
+			Cells[i] = sfSprite_create();
+			sfSprite_setTexture(Cells[i],CellTex,sfTrue);
+			sfSprite_setTextureRect(Cells[i],sfIntRect(0,0,128,128));
+			sfSprite_setOrigin(Cells[i],sfVector2f(64,64));
+			sfSprite_setPosition(Cells[i],sfVector2f(260,224));
+			sfSprite_setScale(Cells[i],sfVector2f(1.5f,1.5f));
+		}
 		
 		music = new Audio("res/gamemusic.ogg");
 		music.Loop = true;
@@ -84,6 +97,8 @@ class StanGrajacy : StanGry
 		qTimer.Active=false;
 
 		NextQuestion();
+		Cwatch.start();
+		Cwatch.reset();
 	}
 
 	protected void ParseQs()
@@ -119,9 +134,17 @@ class StanGrajacy : StanGry
 	
 	public StanGry update(double dt, sfRenderWindow* rwin)
 	{
-		qTimer.Update(dt);
+		qTimer.Update();
 		sfText_setString(CellNtext, "%d CELLS".format(stan.Ecells).toStringz());
 		sfText_setString(ATPtext, "%3d ATP".format(stan.ATP).toStringz());
+		if(stan.ATP<stan.FrameCost)
+		{
+			sfText_setColor(ATPtext,sfRed);
+		}
+		else
+		{
+			sfText_setColor(ATPtext,sfWhite);
+		}
 		sfText_setString(btns["upg1"].text, "Lv%2d".format(stan.lvlAtpPerDiv).toStringz());
 		sfText_setString(btns["upg2"].text, "Lv%2d".format(stan.lvlAtpPerAns).toStringz());
 		sfText_setString(btns["upg3"].text, "Lv%2d".format(stan.lvlDivSpeed).toStringz());
@@ -130,6 +153,19 @@ class StanGrajacy : StanGry
 		sfText_setString(btns["upg2"].text2,"%3d ATP".format(stan.costATPboost).toStringz());
 		sfText_setString(btns["upg3"].text2,"%3d ATP".format(stan.costMito).toStringz());
 		sfText_setString(btns["upg4"].text2,"%3d ATP".format(stan.costMitoPlus).toStringz());
+		if((Cwatch.peek.msecs/1000.0)>=stan.FrameDur)
+		{
+			if(stan.ATP>=stan.FrameCost)
+			{
+				stan.NextFrame();
+				for(int i=0;i<8;i++)
+				{
+					sfSprite_setTextureRect(Cells[i],sfIntRect(0,cast(int)stan.CellFrame*128,128,128));
+				}
+			}
+			Cwatch.reset();
+		}
+		
 		return this;
 	}
 
@@ -159,7 +195,7 @@ class StanGrajacy : StanGry
 			sfRectangleShape_setTextureRect(btns["ans4"].shape,sfIntRect(0,(D==3)?(36):(72),380,36));
 			btns["ans"~text(i+1)].text.sfText_setColor(darkRed);
 		}
-		qTimer.Reset(2.3,&this.NextQuestion);
+		qTimer.Reset(1.0,&this.NextQuestion);
 	}
 
 	public void NextQuestion()
@@ -207,6 +243,25 @@ class StanGrajacy : StanGry
 		sfRenderWindow_drawText(rwin,Qtext,null);
 		sfRenderWindow_drawText(rwin,ATPtext,null);
 		sfRenderWindow_drawText(rwin,CellNtext,null);
+		
+		sfRenderWindow_drawSprite(rwin,Cells[0],null);
+		if(stan.Ecells>=1)
+		{
+			sfRenderWindow_drawSprite(rwin,Cells[1],null);
+		}
+		if(stan.Ecells>=2)
+		{
+			sfRenderWindow_drawSprite(rwin,Cells[2],null);
+			sfRenderWindow_drawSprite(rwin,Cells[3],null);
+		}
+		if(stan.Ecells>=3)
+		{
+			sfRenderWindow_drawSprite(rwin,Cells[4],null);
+			sfRenderWindow_drawSprite(rwin,Cells[5],null);
+			sfRenderWindow_drawSprite(rwin,Cells[6],null);
+			sfRenderWindow_drawSprite(rwin,Cells[7],null);
+		}
+		
 		foreach(Button B; btns)
 		{
 			B.Draw(rwin);

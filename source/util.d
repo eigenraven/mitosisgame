@@ -95,7 +95,7 @@ class Timer
 		sw.reset();
 		sw.start();
 	}
-	public void Update(double dt)
+	public void Update()
 	{
 		if(Active)
 		{

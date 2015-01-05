@@ -1,6 +1,6 @@
 ﻿module paramgry;
 
-import std.math;
+import std.math, std.algorithm, std.stdio;
 
 class Pytanie
 {
@@ -24,6 +24,8 @@ class ParametryGry
 		long ATP = 10;
 		long IleByloPyt = 1; // Zeby nie bylo / przez 0
 		long IleDobrzePyt = 1;
+		long CellFrame = 0;
+		long CellFrames = 16;
 		// Pytania
 		Pytanie[] remQuests;
 		Pytanie[] origQuests;
@@ -42,14 +44,41 @@ class ParametryGry
 	~this()
 	{
 	}
-
+	
+	public void NextFrame()
+	{
+		//writeln(FrameCost);
+		if(ATP>=FrameCost)
+		{
+			ATP-=FrameCost;
+		}
+		CellFrame++;
+		if(CellFrame == CellFrames){Ecells++;CellFrame=0;}
+	}
+	
+	public @property long FrameCost()
+	{
+		if((CellFrame%8)!=0)return 0;
+		return cast(long)max(1.0,3.0 - lvlAtpPerDiv.pow(0.7) + lvlDivSpeed.pow(1.1) + lvlDivSpeedPlus.pow(1.4) + Ecells.pow(0.5));
+	}
+	
+	public @property double FrameDur()
+	{
+		return max(0.2,2.0-(1.0/(50.0-lvlDivSpeed/4-lvlDivSpeedPlus)));
+	}
+	
 	public void AddQuestionATP()
 	{
-		ATP += cast(long)(pow(lvlAtpPerAns,0.7)+0.6);
+		ATP += lvlAtpPerAns;
 	}
 
 	public void ATPmagnet(float x, float y)
 	{
+		if(ATP>=costATPmagnet)
+		{
+			ATP -= costATPmagnet;
+			lvlAtpPerDiv++;
+		}
 	}
 
 	public void ATPboost(float x, float y)
@@ -63,10 +92,20 @@ class ParametryGry
 
 	public void Mitochondria(float x, float y)
 	{
+		if(ATP>=costMito)
+		{
+			ATP -= costMito;
+			lvlDivSpeed++;
+		}
 	}
 
 	public void MitochondriaPlus(float x, float y)
 	{
+		if(ATP>=costMitoPlus)
+		{
+			ATP -= costMitoPlus;
+			lvlDivSpeedPlus++;
+		}
 	}
 	
 	public @property long costATPmagnet()
