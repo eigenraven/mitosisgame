@@ -1,6 +1,6 @@
 ﻿module audio;
 
-import imps;
+import imps,derelict.util.exception;
 
 private immutable(ALfloat)[] listenerPos = [0.0,0.0,0.0];
 private immutable(ALfloat)[] listenerVel = [0.0,0.0,0.0];
@@ -11,9 +11,14 @@ private immutable(ALfloat)[] srcPos = [0.0,0.0,1.0];
 private ALCdevice*  dev;
 private ALCcontext* ctx;
 
+ShouldThrow symFunc(string name)
+{
+	return ShouldThrow.No;
+}
+
 public void InitAudio()
 {
-	DerelictVorbis.load();
+	DerelictVorbisFile.missingSymbolCallback = &symFunc;
 	DerelictVorbisFile.load();
 	DerelictAL.load();
 
