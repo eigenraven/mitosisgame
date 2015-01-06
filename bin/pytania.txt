@@ -1,25 +1,211 @@
-% Answer A.
-= A
-- B
-- C
-- D
-% Answer B.
-- A
-= B
-- C
-- D
-% Answer C.
-- A
-- B
-= C
-- D
-% Answer D.
-- A
-- B
-- C
-= D
+% What kind of cells are produced in mitosis?
+= somatic cells
+- sex cells
+- germ cells
+- gametes
+% A single human haploid cell contains:
+- 21 chromosomes
+= 23 chromosomes
+- 42 chromosomes
+- 46 chromosomes
+% 95% of cell cycle is:
+- mitotic phase
+- cytokinesis
+= interphase
+- DNA synthesis
+% Apoptosis is:
+= a programmed cell death
+- a drug
+- a premature cell death
+- a cellular component 
+% Each member of a chromosome pair is called:
+- a homonym
+- a hominid
+- a haploid
+= a homolog
+% The nuclear envelope is a ... membrane:
+- single
+= double
+- triple
+- quadruple
+% Choose the correct order of the cell cycle.
+- M, C, G1, G2, S
+- G1, G2, S, M, C
+- C, G1, M, G2, S
+= G1, S, G2, M, C
+% What ISN'T the function of mitosis?
+- repair
+- growth
+= sexual reproduction
+- asexual reproduction
+% Each chromosome consists of one...
+- centrofiber
+- centriole
+- centrosome
+= centromere
 % How many and what cells are the result of mitosis?
 - 4 x n
 - 4 x 2n
 = 2 x 2n
 - 2 x n
+% The spindle fibers are produced by the: 
+= centrosomes
+- chromatin
+- nucleous
+- plasma membrane
+% Necrosis can be caused by:
+- metabolic collapse
+- nuclear collapse
+- shrinkage of cell
+= infection, toxins or trauma
+% How many sister chromatids does a duplicated chromosome have?
+= 2
+- 3
+- 4
+- 5
+% In mitosis, the cell plate forms during: 
+- metaphase
+- prophase
+= telophase 
+- anaphase
+% What is the correct order of the stages of mitosis?
+- T, A, M, P
+- M, A, T, P
+= P, M, A, T
+- P, T, A, M
+% During which stage do chromosomes line up at the equator?
+- prophase
+- telophase
+= metaphase
+- anaphase
+% Unlike meiosis, mitosis ... the chromosomes number.
+- deletes
+- reduces
+- multiplies 
+= does not change
+% The mitotic spindle is made of:
+= proteins and microtubules
+- proteins and microfilaments
+- phospholipids and glucose
+- plasmids and lipids
+% A plane that is equidisant between spindle's poles is:
+- telophase plane 
+- anaphase plane
+= metaphase plane
+- cytokinesis plane
+% How long does the anaphase last?
+- a few seconds
+- a couple of hours
+= a few minutes
+- about 15 minutes
+% Prophase ends with:
+- duplication of chromosomes
+- reappearing of nucleili
+- condensation of chromosomes
+= nuclear envelope breakdown
+% The length of DNA in a typical human cell is:
+- 5 metres
+- 4 metres
+= 2 metres
+- 1 metre
+% A branch of biology that studies cells is called:
+= cytology
+- chronobiology
+- virology
+- pathology
+% Mitosis was discovered by:
+- Oscar Hertwig
+= Walther Flemming
+- Gregor Mendel 
+- Alfred Sturtevant
+% Instead of mitosis, prokaryotic cells undergo:
+- conjugation
+- transduction
+= binary fission
+- mutation
+% Which disease is most directly related to abnormal cell division? 
+- high blood pressure
+- coronary heart disease
+- diabetes
+= cancer
+% Human body cells normally have ... chromosomes.
+- 21 chromosomes
+- 23 chromosomes
+- 42 chromosomes
+= 46 chromosomes
+% Is crossing over seen with mitosis?
+- Yes, it is
+= No, it's not
+- Sometimes
+- Only in fetal cells
+% What is another name of DNA?
+- deoxiribonucleic acid
+= deoxyribonucleic acid 
+- deoxirybonucleic acid
+- deoxyrybonucleic acid 
+% Cleavege furrow starts to appear in: 
+- prometaphase
+- anaphase
+= telophase
+- metaphase
+% The key players controlling cell cycle progression are:
+- carbohydrates 
+- nucleic acids 
+- lipids
+= proteins
+% What cellular components are produced during interphase?
+- spindle formation 
+= enzymes
+- nuclear membrane
+- centromeres
+% What is the elongated mass of chromosomes in a cell during interphase?
+= a chromatin 
+- a proteasome
+- a chromosome
+- a bromine
+% Two chromosomes are held together by: 
+- a chromatin
+= a centromere
+- a proteasome
+- a spindle
+% What cellular organelles are made in the nucleolus?
+- cytoplasm
+- chromosomes
+= ribosomes
+- nuclear lamina
+% How many chromosomes are present in the cell during anaphase?
+- 2
+- 4
+- 6
+= 8
+% Why are checkpoints needed in mitosis? 
+- for the correction of DNA
+- to ensure that damaged cells do not replicate
+= all answers are true
+- to regulate cell division
+% What is the function of centrioles?
+= spindle fibers production
+- DNA replication
+- holding chromatids together
+- causing cytokinesis
+% The word "chromosome" means: 
+- colorless body
+= colorful body 
+- metallic body 
+- chromatic body
+% What game are you playing right now? 
+= Mitosis Game 
+- Diablo 3
+- Half-Life 3
+- Tony Hawk's Pro Skater 5
+% The minimum number of chiasmata in a bivalent is 
+- 4
+- 3
+- 2
+= 1
+% If mitosis is not controlled, then the cell: 
+= might undergo apoptosis
+- continues to grow
+- loses its nucleus
+- divides 4 times
+
