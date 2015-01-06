@@ -62,7 +62,7 @@ class StanMenu : StanGry
 
 	public void render(sfRenderWindow* rwin)
 	{
-		sfRenderWindow_drawSprite(rwin,background,rendMode);
+		sfRenderWindow_drawSprite(rwin,background,null);
 		foreach(Button B; btns)
 		{
 			B.Draw(rwin);

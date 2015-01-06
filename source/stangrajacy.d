@@ -23,7 +23,7 @@ class StanGrajacy : StanGry
 	sfFont* Fnt,FntB;
 	sfText* Qtext, CellNtext, ATPtext, CellStats;
 	sfRectangleShape* Rok,Rbad;
-	Audio music;
+	Audio music, sndGood, sndBad, sndSplit;
 	StopWatch Cwatch;
 	bool LockQ=false;
 
@@ -71,6 +71,9 @@ class StanGrajacy : StanGry
 		music = new Audio("res/gamemusic.ogg");
 		music.Loop = true;
 		music.Play();
+		sndGood = new Audio("res/dob_odp.ogg");
+		sndBad = new Audio("res/zla_odp.ogg");
+		sndSplit = new Audio("res/podzial.ogg");
 		
 		btns["ans1"] = new Button("Ans1",8,500,380,36,AnsTex,&OnClickAns!(0));
 		btns["ans1"].text = mkText(Fnt,sfWhite,"???",FONT_SIZE,sfVector2f(16,502));
@@ -180,6 +183,7 @@ class StanGrajacy : StanGry
 				{
 					sfSprite_setTextureRect(Cells[i],R);
 				}
+				if(stan.CellFrame==0)sndSplit.Play();
 			}
 			Cwatch.reset();
 		}
@@ -203,6 +207,7 @@ class StanGrajacy : StanGry
 			btns["ans"~text(i+1)].text.sfText_setColor(darkGreen);
 			stan.IleDobrzePyt++;
 			stan.AddQuestionATP();
+			sndGood.Play();
 		}
 		else
 		{
@@ -212,6 +217,7 @@ class StanGrajacy : StanGry
 			sfRectangleShape_setTextureRect(btns["ans3"].shape,sfIntRect(0,(D==2)?(36):(72),380,36));
 			sfRectangleShape_setTextureRect(btns["ans4"].shape,sfIntRect(0,(D==3)?(36):(72),380,36));
 			btns["ans"~text(i+1)].text.sfText_setColor(darkRed);
+			sndBad.Play();
 		}
 		F.append(LogName, "\n>> Nowa odpowiedz - %s\n> %s\n> %s\n".format((i==D)?("OK"):("zla"),stan.curQuest.pytanie,stan.curQuest.odp[i]));
 		qTimer.Reset(1.0,&this.NextQuestion);
