@@ -9,6 +9,8 @@ enum int FONTU_SIZE = 16;
 sfColor darkGreen = sfColor(0,90,0,255);
 sfColor darkRed = sfColor(90,0,0,255);
 
+string LogName;
+
 class StanGrajacy : StanGry
 {
 	Button[string] btns;
@@ -28,7 +30,7 @@ class StanGrajacy : StanGry
 	/// Random [a..b]
 	public double RD(double a, double b)
 	{
-		return uniform(a,b,rand);
+		return uniform(a,b);
 	}
 
 	public sfText* mkText(sfFont* font, sfColor color, string str, int charSize, sfVector2f pos)
@@ -44,6 +46,8 @@ class StanGrajacy : StanGry
 
 	public this()
 	{
+		LogName = "loggry-"~Clock.currTime().toISOString()~".log";
+		F.write(LogName, "--- Cellionaires Log ---");
 		stan = new ParametryGry();
 		ParseQs();
 		BG_tex = sfTexture_createFromFile("res/gamebg.png".toStringz(),null);
@@ -209,6 +213,7 @@ class StanGrajacy : StanGry
 			sfRectangleShape_setTextureRect(btns["ans4"].shape,sfIntRect(0,(D==3)?(36):(72),380,36));
 			btns["ans"~text(i+1)].text.sfText_setColor(darkRed);
 		}
+		F.append(LogName, "\n>> Nowa odpowiedz - %s\n> %s\n> %s\n".format((i==D)?("OK"):("zla"),stan.curQuest.pytanie,stan.curQuest.odp[i]));
 		qTimer.Reset(1.0,&this.NextQuestion);
 	}
 
