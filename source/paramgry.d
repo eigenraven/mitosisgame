@@ -61,10 +61,15 @@ class ParametryGry
 		if((CellFrame%8)!=0)return 0;
 		return cast(long)max(1.0,3.0 - lvlAtpPerDiv.pow(0.7) + lvlDivSpeed.pow(1.1) + lvlDivSpeedPlus.pow(1.4) + Ecells.pow(0.5));
 	}
-	
+
+	public @property long FrameCost2()
+	{
+		return cast(long)max(1.0,3.0 - lvlAtpPerDiv.pow(0.7) + lvlDivSpeed.pow(1.1) + lvlDivSpeedPlus.pow(1.4) + Ecells.pow(0.5));
+	}
+
 	public @property double FrameDur()
 	{
-		return max(0.2,2.0-(1.0/(50.0-lvlDivSpeed/4-lvlDivSpeedPlus)));
+		return max(0.1, 4.0 - (lvlDivSpeed/12.0) - (lvlDivSpeedPlus/4.0));
 	}
 	
 	public void AddQuestionATP()

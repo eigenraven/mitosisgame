@@ -19,7 +19,8 @@ class StanGrajacy : StanGry
 	sfSprite*[8] Cells;
 	sfTexture* BG_tex, AnsTex, CellTex;
 	sfFont* Fnt,FntB;
-	sfText* Qtext, CellNtext, ATPtext;
+	sfText* Qtext, CellNtext, ATPtext, CellStats;
+	sfRectangleShape* Rok,Rbad;
 	Audio music;
 	StopWatch Cwatch;
 	bool LockQ=false;
@@ -59,7 +60,7 @@ class StanGrajacy : StanGry
 			sfSprite_setTexture(Cells[i],CellTex,sfTrue);
 			sfSprite_setTextureRect(Cells[i],sfIntRect(0,0,128,128));
 			sfSprite_setOrigin(Cells[i],sfVector2f(64,64));
-			sfSprite_setPosition(Cells[i],sfVector2f(260,224));
+			sfSprite_setPosition(Cells[i],sfVector2f(100+ (i%3)*160,100+ (i/3)*100));
 			sfSprite_setScale(Cells[i],sfVector2f(1.5f,1.5f));
 		}
 		
@@ -69,11 +70,11 @@ class StanGrajacy : StanGry
 		
 		btns["ans1"] = new Button("Ans1",8,500,380,36,AnsTex,&OnClickAns!(0));
 		btns["ans1"].text = mkText(Fnt,sfWhite,"???",FONT_SIZE,sfVector2f(16,502));
-		btns["ans2"] = new Button("Ans1",400,500,380,36,AnsTex,&OnClickAns!(1));
+		btns["ans2"] = new Button("Ans2",400,500,380,36,AnsTex,&OnClickAns!(1));
 		btns["ans2"].text = mkText(Fnt,sfWhite,"???",FONT_SIZE,sfVector2f(408,502));
-		btns["ans3"] = new Button("Ans1",8,540,380,36,AnsTex,&OnClickAns!(2));
+		btns["ans3"] = new Button("Ans3",8,540,380,36,AnsTex,&OnClickAns!(2));
 		btns["ans3"].text = mkText(Fnt,sfWhite,"???",FONT_SIZE,sfVector2f(16,542));
-		btns["ans4"] = new Button("Ans1",400,540,380,36,AnsTex,&OnClickAns!(3));
+		btns["ans4"] = new Button("Ans4",400,540,380,36,AnsTex,&OnClickAns!(3));
 		btns["ans4"].text = mkText(Fnt,sfWhite,"???",FONT_SIZE,sfVector2f(408,542));
 		Qtext = mkText(Fnt,sfWhite,"QQQ???QQQ",FONT_SIZE,sfVector2f(16,465));
 
@@ -91,7 +92,17 @@ class StanGrajacy : StanGry
 		btns["upg4"].text2= mkText(FntB,sfWhite,"123 ATP",FONTU_SIZE,sfVector2f(582,348));
 
 		CellNtext = mkText(FntB,sfWhite,"? CELLS",FONTB_SIZE,sfVector2f(210,410));
-		ATPtext = mkText(FntB,sfWhite,"? ATP",FONTB_SIZE,sfVector2f(32,400));
+		ATPtext = mkText(FntB,sfWhite,"? ATP",FONTB_SIZE,sfVector2f(16,400));
+		CellStats = mkText(Fnt,sfWhite,"-",14,sfVector2f(0,0));
+
+		Rok = sfRectangleShape_create();
+		Rbad= sfRectangleShape_create();
+		sfRectangleShape_setPosition(Rok , sfVector2f(8,493));
+		sfRectangleShape_setPosition(Rbad, sfVector2f(8,493));
+		sfRectangleShape_setFillColor(Rok , darkGreen);
+		sfRectangleShape_setFillColor(Rbad, darkRed);
+		sfRectangleShape_setSize(Rok ,sfVector2f(800-24,6));
+		sfRectangleShape_setSize(Rbad,sfVector2f(800-24,6));
 
 		qTimer = new Timer(3,null);
 		qTimer.Active=false;
@@ -153,6 +164,8 @@ class StanGrajacy : StanGry
 		sfText_setString(btns["upg2"].text2,"%3d ATP".format(stan.costATPboost).toStringz());
 		sfText_setString(btns["upg3"].text2,"%3d ATP".format(stan.costMito).toStringz());
 		sfText_setString(btns["upg4"].text2,"%3d ATP".format(stan.costMitoPlus).toStringz());
+		sfText_setString(CellStats, "M.Cost: %3d ATP ; M.Length: %f".format(stan.FrameCost2,stan.FrameDur*16).toStringz());
+		sfRectangleShape_setScale(Rok, sfVector2f(cast(float)(stan.IleDobrzePyt)/stan.IleByloPyt,1.0f));
 		if((Cwatch.peek.msecs/1000.0)>=stan.FrameDur)
 		{
 			if(stan.ATP>=stan.FrameCost)
@@ -244,6 +257,7 @@ class StanGrajacy : StanGry
 		sfRenderWindow_drawText(rwin,Qtext,null);
 		sfRenderWindow_drawText(rwin,ATPtext,null);
 		sfRenderWindow_drawText(rwin,CellNtext,null);
+		sfRenderWindow_drawText(rwin,CellStats,null);
 		
 		sfRenderWindow_drawSprite(rwin,Cells[0],null);
 		if(stan.Ecells>=1)
@@ -262,6 +276,9 @@ class StanGrajacy : StanGry
 			sfRenderWindow_drawSprite(rwin,Cells[6],null);
 			sfRenderWindow_drawSprite(rwin,Cells[7],null);
 		}
+
+		sfRenderWindow_drawRectangleShape(rwin,Rbad,null);
+		sfRenderWindow_drawRectangleShape(rwin,Rok ,null);
 		
 		foreach(Button B; btns)
 		{
@@ -279,6 +296,25 @@ class StanGrajacy : StanGry
 				{
 					B.RunCallback();
 				}
+			}
+		}
+		else if(ev.type == sfEvtKeyPressed)
+		{
+			if(ev.key.code==sfKeyAdd)
+			{
+				stan.ATP += 10;
+			}
+			else if(ev.key.code==sfKeySubtract)
+			{
+				stan.ATP -= 9;
+			}
+			else if(ev.key.code==sfKeyO)
+			{
+				stan.Ecells++;
+			}
+			else if(ev.key.code==sfKeyL)
+			{
+				stan.Ecells--;
 			}
 		}
 	}
