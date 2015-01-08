@@ -26,6 +26,7 @@ class StanGrajacy : StanGry
 	Audio music, sndGood, sndBad, sndSplit;
 	StopWatch Cwatch;
 	bool LockQ=false;
+	long pcells=-100;
 
 	/// Random [a..b]
 	public double RD(double a, double b)
@@ -64,8 +65,8 @@ class StanGrajacy : StanGry
 			sfSprite_setTexture(Cells[i],CellTex,sfTrue);
 			sfSprite_setTextureRect(Cells[i],sfIntRect(0,0,128,128));
 			sfSprite_setOrigin(Cells[i],sfVector2f(64,64));
-			sfSprite_setPosition(Cells[i],sfVector2f(100+ (i%3)*160,100+ (i/3)*100));
-			sfSprite_setScale(Cells[i],sfVector2f(1.5f,1.5f));
+			sfSprite_setPosition(Cells[i],sfVector2f(100+ (i%3)*160,90+ (i/3)*120));
+			sfSprite_setScale(Cells[i],sfVector2f(1.0f,1.0f));
 		}
 		
 		music = new Audio("res/gamemusic.ogg");
@@ -152,6 +153,21 @@ class StanGrajacy : StanGry
 	
 	public StanGry update(double dt, sfRenderWindow* rwin)
 	{
+		if(pcells!=stan.Ecells)
+		{
+			pcells = stan.Ecells;
+			string K = "cells-stage%d".format(min(pcells,3));
+			enum float XOFF = 258;
+			enum float YOFF = 210;
+			for(char I='0';I<'8';I++)
+			{
+				float XV = cfg.intValue(K,"Cell%c-X".format(I));
+				float YV = cfg.intValue(K,"Cell%c-Y".format(I));
+				float AV = cfg.intValue(K,"Cell%c-A".format(I));
+				sfSprite_setPosition(Cells[I-'0'], sfVector2f(XOFF+XV,YOFF+YV));
+				sfSprite_setRotation(Cells[I-'0'], AV);
+			}
+		}
 		qTimer.Update();
 		sfText_setString(CellNtext, "%d CELLS".format(stan.Ecells).toStringz());
 		sfText_setString(ATPtext, "%3d ATP".format(stan.ATP).toStringz());
@@ -253,11 +269,21 @@ class StanGrajacy : StanGry
 		btns["ans2"].text.sfText_setColor(sfWhite);
 		btns["ans3"].text.sfText_setColor(sfWhite);
 		btns["ans4"].text.sfText_setColor(sfWhite);
+		btns["ans1"].text.sfText_setString(toStringz("------"));
+		btns["ans2"].text.sfText_setString(toStringz("------"));
+		btns["ans3"].text.sfText_setString(toStringz("------"));
+		btns["ans4"].text.sfText_setString(toStringz("------"));
+		Qtext.sfText_setString(toStringz(P.pytanie));
+		qTimer.Reset(1,&this.DispAnswers);
+	}
+
+	public void DispAnswers()
+	{
+		auto P = stan.curQuest;
 		btns["ans1"].text.sfText_setString(toStringz(P.odp[0]));
 		btns["ans2"].text.sfText_setString(toStringz(P.odp[1]));
 		btns["ans3"].text.sfText_setString(toStringz(P.odp[2]));
 		btns["ans4"].text.sfText_setString(toStringz(P.odp[3]));
-		Qtext.sfText_setString(toStringz(P.pytanie));
 		LockQ = false;
 		qTimer.Active = false;
 	}

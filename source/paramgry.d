@@ -69,7 +69,7 @@ class ParametryGry
 
 	public @property double FrameDur()
 	{
-		return max(0.1, 4.0 - (lvlDivSpeed/12.0) - (lvlDivSpeedPlus/4.0));
+		return max(0.1, 7.0 - (lvlDivSpeed/12.0) - (lvlDivSpeedPlus/4.0));
 	}
 	
 	public void AddQuestionATP()
