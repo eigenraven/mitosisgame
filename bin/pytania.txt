@@ -180,7 +180,7 @@
 = 8
 % Why are checkpoints needed in mitosis? 
 - for the correction of DNA
-- to ensure that damaged cells do not replicate
+- so that damaged cells don't replicate
 = all answers are true
 - to regulate cell division
 % What is the function of centrioles?
