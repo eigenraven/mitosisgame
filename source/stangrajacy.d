@@ -187,7 +187,7 @@ class StanGrajacy : StanGry
 		sfText_setString(btns["upg2"].text2,"%3d ATP".format(stan.costATPboost).toStringz());
 		sfText_setString(btns["upg3"].text2,"%3d ATP".format(stan.costMito).toStringz());
 		sfText_setString(btns["upg4"].text2,"%3d ATP".format(stan.costMitoPlus).toStringz());
-		sfText_setString(CellStats, "M.Cost: %3d ATP ; M.Length: %f".format(stan.FrameCost2,stan.FrameDur*16).toStringz());
+		sfText_setString(CellStats, "M.Cost: %3d ATP ; M.Length: %f".format(stan.FrameCost2,stan.FrameDur*8).toStringz());
 		sfRectangleShape_setScale(Rok, sfVector2f(cast(float)(stan.IleDobrzePyt)/stan.IleByloPyt,1.0f));
 		if((Cwatch.peek.msecs/1000.0)>=stan.FrameDur)
 		{
