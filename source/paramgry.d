@@ -25,7 +25,7 @@ class ParametryGry
 		long IleByloPyt = 1; // Zeby nie bylo / przez 0
 		long IleDobrzePyt = 1;
 		long CellFrame = 0;
-		long CellFrames = 16;
+		long CellFrames = 7;
 		// Pytania
 		Pytanie[] remQuests;
 		Pytanie[] origQuests;
