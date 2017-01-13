@@ -8,12 +8,11 @@
 	"copyright": "Copyright © 2014, pre-IB class",
 	"authors": ["Jakub Szewczyk","Maria Gajewska","Konrad Socha","Dawid Lorenz","Antoni Baum"],
 	"dependencies": {
-		"derelict-util":">=1.9.0",
-		"derelict-gl3":">=1.0.11",
-		"derelict-sfml2":">=1.1.0",
-		"derelict-al":">=1.0.0",
+		"derelict-gl3":">=1.0.19",
+		"derelict-sfml2":">=3.0.2",
+		"derelict-al":">=1.0.1",
 		"derelict-vorbis":">=1.0.1",
-		"onyx-config": ">=1.1.4"
+		"onyx-config": ">=2.0.5"
 	}, 
 	"libs-posix":["dl","GL"],
 	"libs-windows":["opengl32","user32","kernel32"]

@@ -129,7 +129,7 @@ class StanGrajacy : StanGry
 		for(int i=0;i<LLA.length;i+=5)
 		{
 			string Q = LLA[i];
-			string As[4]= LLA[i+1..i+5];
+			string[4] As= LLA[i+1..i+5];
 			enforce(Q[0]=='%');
 			int numm, numc,CA;
 			for(int j=0;j<4;j++)
@@ -161,9 +161,9 @@ class StanGrajacy : StanGry
 			enum float YOFF = 210;
 			for(char I='0';I<'8';I++)
 			{
-				float XV = cfg.intValue(K,"Cell%c-X".format(I));
-				float YV = cfg.intValue(K,"Cell%c-Y".format(I));
-				float AV = cfg.intValue(K,"Cell%c-A".format(I));
+				float XV = cfg.value!int(K,"Cell%c-X".format(I));
+				float YV = cfg.value!int(K,"Cell%c-Y".format(I));
+				float AV = cfg.value!int(K,"Cell%c-A".format(I));
 				sfSprite_setPosition(Cells[I-'0'], sfVector2f(XOFF+XV,YOFF+YV));
 				sfSprite_setRotation(Cells[I-'0'], AV);
 			}

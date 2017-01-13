@@ -7,11 +7,11 @@ public int WinFlags = sfTitlebar|sfClose;
 public string WindowTitle = "Mitosis - Cellionaires ; FPS = %5.2f";
 public sfRenderWindow* rwin;
 public StanGry gstate,nstate;
-public immutable(ConfBundle) cfg;
+public immutable(Bundle) cfg;
 
 static this()
 {
-	cfg = immutable ConfBundle("config.cfg");
+	cfg = new immutable Bundle("config.cfg");
 }
 
 void main()
@@ -21,9 +21,9 @@ void main()
 	DerelictSFML2Window.load();
 	DerelictSFML2Graphics.load();
 
-	WindowWidth = cfg.intValue("video","WinWidth");
-	WindowHeight = cfg.intValue("video","WinHeight");
-	if(cfg.intValue("video","WinResize")>0)WinFlags |= sfResize;
+	WindowWidth = cfg.value!int("video","WinWidth");
+	WindowHeight = cfg.value!int("video","WinHeight");
+	if(cfg.value!int("video","WinResize")>0)WinFlags |= sfResize;
 
 	InitAudio();
 	scope(exit)QuitAudio();

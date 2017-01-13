@@ -2,8 +2,8 @@
 module imps;
 
 public import std.stdio, std.string, std.string, std.conv, std.array, std.algorithm, std.math, F=std.file;
-public import std.random, core.memory, std.format, std.c.string, std.datetime, std.exception;
-public import std.functional, onyx.config.bundle, std.system;
+public import std.random, core.memory, std.format, core.stdc.string, std.datetime, std.exception;
+public import std.functional, onyx.bundle, std.system;
 public import derelict.sfml2.system;
 public import derelict.sfml2.window;
 public import derelict.sfml2.graphics;

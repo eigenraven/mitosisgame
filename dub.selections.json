@@ -1,15 +1,12 @@
 {
 	"fileVersion": 1,
 	"versions": {
-		"gl3n": "1.0.0",
-		"derelict_extras-bass": "1.0.0",
-		"derelict-ogg": "1.0.1",
-		"derelict-util": "1.9.0",
-		"onyx-config": "1.1.4",
-		"derelict-sfml2": "1.1.0",
-		"derelict-glfw3": "1.0.2",
-		"derelict-al": "1.0.0",
-		"derelict-vorbis": "1.0.1",
-		"derelict-gl3": "1.0.11"
+		"derelict-al": "1.0.3",
+		"derelict-gl3": "1.0.21",
+		"derelict-ogg": "1.0.2",
+		"derelict-sfml2": "3.0.2",
+		"derelict-util": "2.0.6",
+		"derelict-vorbis": "1.0.2",
+		"onyx-config": "2.0.5"
 	}
 }
